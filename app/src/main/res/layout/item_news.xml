@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="start"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/contentImage"
+    <data>
+
+        <variable
+            name="article"
+            type="secretymus.id.newsapp.model.Article" />
+
+        <variable
+            name="listener"
+            type="secretymus.id.newsapp.news.NewsClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/corneredImageView"
-        tools:src="@tools:sample/backgrounds/scenic" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/categoryText"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentImage"
-        tools:text="World" />
+        android:gravity="start"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        android:onClick="@{listener::onNewsClicked}">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categoryText"
-        tools:text="Studi: Konsumsi Vitamin D Kurangi Risiko Kanker - CNN Indonesia" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:imageUrl="@{article.urlToImage}"
+            android:id="@+id/contentImage"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+        <!--            app:shapeAppearanceOverlay="@style/corneredImageView"-->
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/publishTimeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        app:layout_constraintBottom_toBottomOf="@id/categoryText"
-        app:layout_constraintStart_toEndOf="@id/categoryText"
-        app:layout_constraintTop_toTopOf="@id/categoryText"
-        tools:text="10 Januari 2020 | 10:12" />
+        <com.google.android.material.textview.MaterialTextView
+            android:text="@{article.source.name}"
+            android:id="@+id/categoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contentImage"
+            tools:text="World" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:text="@{article.title}"
+            android:id="@+id/titleText"
+            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoryText"
+            tools:text="Studi: Konsumsi Vitamin D Kurangi Risiko Kanker - CNN Indonesia" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:text="@{article.publishedAt}"
+            android:id="@+id/publishTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="@id/categoryText"
+            app:layout_constraintStart_toEndOf="@id/categoryText"
+            app:layout_constraintTop_toTopOf="@id/categoryText"
+            tools:text="10 Januari 2020 | 10:12" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

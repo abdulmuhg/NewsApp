@@ -1,11 +1,11 @@
 package secretymus.id.newsapp.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import secretymus.id.newsapp.R
+import secretymus.id.newsapp.foundation.BaseActivity
 import secretymus.id.newsapp.news.NewsFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
