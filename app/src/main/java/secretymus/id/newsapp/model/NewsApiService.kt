@@ -4,8 +4,10 @@ import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import secretymus.id.newsapp.views.MainActivity
 
 class NewsApiService {
+
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -14,7 +16,7 @@ class NewsApiService {
         .create(NewsApi::class.java)
 
     fun getNews(): Single<News> {
-        return api.getNews(COUNTRY_IDN_VALUE, "key")
+        return api.getNews(COUNTRY_IDN_VALUE, "secret")
     }
 
     companion object {
