@@ -1,4 +1,4 @@
-package secretymus.id.newsapp.news
+package secretymus.id.newsapp.views
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,10 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_news.*
 import secretymus.id.newsapp.R
+import secretymus.id.newsapp.news.NewsListAdapter
+import secretymus.id.newsapp.news.NewsViewModel
 
 class NewsFragment : Fragment() {
 

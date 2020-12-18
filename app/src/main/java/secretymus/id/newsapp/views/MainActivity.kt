@@ -3,7 +3,6 @@ package secretymus.id.newsapp.views
 import android.os.Bundle
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.foundation.BaseActivity
-import secretymus.id.newsapp.news.NewsFragment
 
 class MainActivity : BaseActivity() {
 

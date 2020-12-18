@@ -44,5 +44,6 @@ data class News(
 data class Source(
         @SerializedName("id")
         val id: String?,
+        @SerializedName("name")
         var name: String
 )

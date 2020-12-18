@@ -16,7 +16,7 @@ class NewsApiService {
         .create(NewsApi::class.java)
 
     fun getNews(): Single<News> {
-        return api.getNews(COUNTRY_IDN_VALUE, "secret")
+        return api.getNews(COUNTRY_IDN_VALUE, "339e6576cb374c28a8467f42beb485f6")
     }
 
     companion object {
