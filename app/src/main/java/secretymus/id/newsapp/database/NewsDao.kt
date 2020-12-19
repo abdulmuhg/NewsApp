@@ -1,8 +1,9 @@
-package secretymus.id.newsapp.model
+package secretymus.id.newsapp.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import secretymus.id.newsapp.model.Article
 
 @Dao
 interface NewsDao {

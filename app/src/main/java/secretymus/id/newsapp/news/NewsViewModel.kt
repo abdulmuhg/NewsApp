@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 import secretymus.id.newsapp.foundation.BaseViewModel
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.model.News
-import secretymus.id.newsapp.model.NewsApiService
-import secretymus.id.newsapp.model.NewsDatabase
+import secretymus.id.newsapp.network.NewsApiService
+import secretymus.id.newsapp.database.NewsDatabase
 
 class NewsViewModel(application: Application): BaseViewModel(application) {
 

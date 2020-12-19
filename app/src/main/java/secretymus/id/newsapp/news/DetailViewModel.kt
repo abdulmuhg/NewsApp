@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import secretymus.id.newsapp.foundation.BaseViewModel
 import secretymus.id.newsapp.model.Article
-import secretymus.id.newsapp.model.NewsDatabase
+import secretymus.id.newsapp.database.NewsDatabase
 
 class DetailViewModel(application: Application): BaseViewModel(application) {
     val newsLiveData = MutableLiveData<Article>()
