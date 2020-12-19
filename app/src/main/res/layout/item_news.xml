@@ -81,6 +81,42 @@
                 app:layout_constraintTop_toTopOf="@id/categoryText"
                 tools:text="10 Januari 2020 | 10:12" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:visibility="gone"
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{article.description}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintBottom_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toEndOf="@id/categoryText"
+                app:layout_constraintTop_toTopOf="@id/categoryText"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:visibility="gone"
+                android:id="@+id/url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{article.url}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintBottom_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toEndOf="@id/categoryText"
+                app:layout_constraintTop_toTopOf="@id/categoryText" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:visibility="gone"
+                android:id="@+id/contentText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{article.content}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                app:layout_constraintBottom_toBottomOf="@id/categoryText"
+                app:layout_constraintStart_toEndOf="@id/categoryText"
+                app:layout_constraintTop_toTopOf="@id/categoryText"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

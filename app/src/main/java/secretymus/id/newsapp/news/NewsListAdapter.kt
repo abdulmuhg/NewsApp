@@ -1,18 +1,23 @@
 package secretymus.id.newsapp.news
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_news.view.*
+import kotlinx.android.synthetic.main.item_loading.view.*
 import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
+import secretymus.id.newsapp.model.Source
+import secretymus.id.newsapp.views.NewsFragmentDirections
 
 class NewsListAdapter(
-        val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    private val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     NewsClickListener {
 
     companion object {
@@ -26,9 +31,25 @@ class NewsListAdapter(
         ITEM_VIEW_TYPE_CONTENT
     }
 
+    fun loadMore(nArticleList: List<Article>) {
+
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            if (articleList.size > 0) {
+                articleList?.apply {
+                    removeAt(articleList.size - 1)
+                }
+            }
+            articleList.addAll(nArticleList)
+            articleList.add(nArticleList[0].copy())
+            notifyDataSetChanged()
+        }, 2500)
+    }
+
     fun updateNewsList(nArticleList: List<Article>){
         articleList.clear()
         articleList.addAll(nArticleList)
+        articleList.add(nArticleList[0].copy())
         notifyDataSetChanged()
     }
 
@@ -61,6 +82,19 @@ class NewsListAdapter(
     override fun getItemCount(): Int = articleList.size
 
     override fun onNewsClicked(view: View) {
-        val articleId = view.titleText.text.toString()
+        val articleTitle = view.titleText.text.toString()
+        val article = Article(
+            Source("1", "unknown"),
+            view.categoryText.text.toString(),
+            articleTitle,
+            view.description.text.toString(),
+            view.url.text.toString(),
+            view.contentImage.resources.toString(),
+            view.publishTimeText.text.toString(),
+            view.contentText.text.toString()
+        )
+        val action = NewsFragmentDirections.actionDetailFragment(0, articleTitle, article)
+        Navigation.findNavController(view).navigate(action)
     }
+
 }
