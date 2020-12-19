@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import secretymus.id.newsapp.R
-import secretymus.id.newsapp.views.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     private val loadingTime = 2000
