@@ -25,10 +25,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
     val newsLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
-    fun refresh() {
-        fetchFromRemote(currentPage)
-    }
-
     fun refreshBypassCache() {
         fetchFromRemote(currentPage)
     }
@@ -51,21 +47,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         loading.value = false
     }
 
-    private fun storeNewsLocally(list: List<Article>) {
-        launch {
-            val dao = NewsDatabase(getApplication()).newsDao()
-            dao.deleteAllNews()
-            val result = dao.insertAll(*list.toTypedArray())
-            var i = 0
-            while (i < list.size) {
-                list[i].uuid = result[i].toInt()
-                ++i
-            }
-            newsRetrieved(list)
-        }
-    }
-
-    fun fetchFromRemote(page: Int) {
+    private fun fetchFromRemote(page: Int) {
         loading.value = true
         disposable.add(
             newsApiService.getNews(page)

@@ -1,11 +1,9 @@
 package secretymus.id.newsapp.foundation
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -41,14 +39,14 @@ open class BaseActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
     }
 
     private fun isPermissionGranted(permission: String): Boolean {
-        when (ContextCompat.checkSelfPermission(this, permission)) {
+        return when (ContextCompat.checkSelfPermission(this, permission)) {
             PackageManager.PERMISSION_GRANTED -> {
                 Log.i(TAG, "Permission granted: $permission")
-                return true
+                true
             }
             else -> {
                 Log.i(TAG, "Permission NOT granted: $permission")
-                return false
+                false
             }
         }
     }
@@ -61,21 +59,8 @@ open class BaseActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissio
         }
     }
 
-    fun setProgressBar(bar: ProgressBar) {
-        progressBar = bar
-    }
-
-    fun showProgressBar() {
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    fun hideProgressBar() {
+    private fun hideProgressBar() {
         progressBar?.visibility = View.INVISIBLE
-    }
-
-    fun hideKeyboard(view: View) {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     public override fun onStop() {

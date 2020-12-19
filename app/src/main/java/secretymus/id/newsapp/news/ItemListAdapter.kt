@@ -29,11 +29,10 @@ class ItemListAdapter(
     }
 
     fun loadMore(nArticleList: List<Article>) {
-
         val handler = Handler()
-        handler.postDelayed(Runnable {
+        handler.postDelayed( {
             if (articleList.size > 0) {
-                articleList?.apply {
+                articleList.apply {
                     removeAt(articleList.size - 1)
                 }
             }
@@ -41,12 +40,6 @@ class ItemListAdapter(
             articleList.add(nArticleList[0].copy())
             notifyDataSetChanged()
         }, 2500)
-    }
-
-    fun updateNewsList(nArticleList: List<Article>){
-        articleList.clear()
-        articleList.addAll(nArticleList)
-        notifyDataSetChanged()
     }
 
     fun retrieveBookmarkList(nArticleList: List<Article>){
@@ -73,14 +66,12 @@ class ItemListAdapter(
         if (holder is NewsViewHolder){
             holder.view.article = articleList[position]
             holder.view.listener = this
-        }else {
-
         }
     }
 
     class NewsViewHolder(var view: ItemNewsBinding): RecyclerView.ViewHolder(view.root)
 
-    class ViewHolderLoading(var itemView: View?) : RecyclerView.ViewHolder(itemView!!)
+    class ViewHolderLoading(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
     override fun getItemCount(): Int = articleList.size
 

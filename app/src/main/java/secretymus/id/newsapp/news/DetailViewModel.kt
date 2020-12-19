@@ -9,7 +9,7 @@ import secretymus.id.newsapp.model.NewsDatabase
 
 class DetailViewModel(application: Application): BaseViewModel(application) {
     val newsLiveData = MutableLiveData<Article>()
-    var actionListener: NewsActionListener? = null
+    private var actionListener: NewsActionListener? = null
 
     fun fetch(article: Article) {
         newsLiveData.postValue(article)

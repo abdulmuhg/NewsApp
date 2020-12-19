@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.FragmentDetailBinding
@@ -42,7 +41,7 @@ class DetailFragment : Fragment(), NewsActionListener {
     }
     
     private fun observeViewModel() {
-        viewModel.newsLiveData.observe(viewLifecycleOwner, Observer { article ->
+        viewModel.newsLiveData.observe(viewLifecycleOwner, { article ->
             article?.let {
                 dataBinding.article = mArticle
             }

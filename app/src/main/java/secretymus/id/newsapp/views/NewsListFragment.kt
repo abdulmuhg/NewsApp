@@ -22,8 +22,6 @@ class NewsListFragment : Fragment() {
     lateinit var mlayoutManager: LinearLayoutManager
     private lateinit var viewModel: NewsViewModel
     private val newsListAdapter = ItemListAdapter(arrayListOf())
-
-    private var listsLoaded = arrayListOf<Article>()
     var currentPage: Int = 1
 
     override fun onCreateView(
@@ -83,14 +81,11 @@ class NewsListFragment : Fragment() {
     }
 
     private fun addScrollerListener(list: List<Article>) {
-        //attaches scrollListener with RecyclerView
         articleList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                    //findLastCompletelyVisibleItemPosition() returns position of last fully visible view.
-                    ////It checks, fully visible view is the last one.
                     val lastItemAt = viewModel.news.value?.lastIndex
-                    Log.d("NewsListFragment", "lastItemAt = "+ lastItemAt)
+                    Log.d("NewsListFragment", "lastItemAt = $lastItemAt")
                     if (mlayoutManager.findLastCompletelyVisibleItemPosition() == lastItemAt) {
                         Log.d("NewsListFragment", "Is Last Row")
                         viewModel.loadMore(viewModel.currentPage)
@@ -105,7 +100,6 @@ class NewsListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.list_menu, menu)
 
-        // Associate searchable configuration with the SearchView
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
