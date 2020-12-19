@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="secretymus.id.newsapp.news.NewsClickListener" />
+            type="secretymus.id.newsapp.news.ItemClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView

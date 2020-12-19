@@ -13,9 +13,9 @@ import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.views.NewsFragmentDirections
 
-class NewsListAdapter(
+class ItemListAdapter(
     private val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    NewsClickListener {
+    ItemClickListener {
 
     companion object {
         const val ITEM_VIEW_TYPE_CONTENT = 1
@@ -49,7 +49,6 @@ class NewsListAdapter(
         articleList.add(nArticleList[0].copy())
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

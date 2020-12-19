@@ -2,6 +2,6 @@ package secretymus.id.newsapp.news
 
 import android.view.View
 
-interface NewsClickListener {
+interface ItemClickListener {
     fun onNewsClicked(view: View)
 }

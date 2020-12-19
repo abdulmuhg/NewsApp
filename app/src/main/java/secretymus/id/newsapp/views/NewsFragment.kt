@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_news.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.model.Article
-import secretymus.id.newsapp.news.NewsListAdapter
+import secretymus.id.newsapp.news.ItemListAdapter
 import secretymus.id.newsapp.news.NewsViewModel
 
 class NewsFragment : Fragment() {
@@ -22,7 +22,7 @@ class NewsFragment : Fragment() {
     }
     lateinit var mlayoutManager: LinearLayoutManager
     private lateinit var viewModel: NewsViewModel
-    private val newsListAdapter = NewsListAdapter(arrayListOf())
+    private val newsListAdapter = ItemListAdapter(arrayListOf())
     private var listsLoaded = arrayListOf<Article>()
 
     var currentPage: Int = 1
