@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="secretymus.id.newsapp.views.NewsFragment"
+        tools:layout="@layout/fragment_news"
         android:label="NewsFragment">
 
         <action
@@ -29,15 +30,6 @@
             app:enterAnim="@animator/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
 
-        <argument
-            android:name="articleId"
-            android:defaultValue="0"
-            app:argType="integer" />
-
-        <argument
-            android:name="articleTitle"
-            android:defaultValue=""
-            app:argType="string" />
         <argument
             android:name="mArticle"
             app:argType="secretymus.id.newsapp.model.Article" />

@@ -68,9 +68,17 @@ class NewsViewModel : ViewModel() {
                 "",
                 "10 January 2020",
                 "lorem ipsum content")
+        val dummyArticle_ = Article(Source("", "Id"),
+            "Authors 2",
+            "Some Sample Title 2",
+            "Sample description 2",
+            "",
+            "",
+            "11 January 2020",
+            "lorem ipsum content content")
         news.postValue(
                 listOf(
-                        dummyArticle.copy(),
+                        dummyArticle_,
                         dummyArticle.copy(),
                         dummyArticle.copy(),
                         dummyArticle.copy(),

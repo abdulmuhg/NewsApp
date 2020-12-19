@@ -1,8 +1,11 @@
 package secretymus.id.newsapp.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Article(
         @SerializedName("source")
         val source: Source,
@@ -27,7 +30,7 @@ data class Article(
 
         @SerializedName("content")
         val content: String
-)
+) : Parcelable
 
 data class News(
         @SerializedName("status")
@@ -41,9 +44,10 @@ data class News(
         val articles: List<Article>
 )
 
+@Parcelize
 data class Source(
         @SerializedName("id")
         val id: String?,
         @SerializedName("name")
         var name: String
-)
+) : Parcelable

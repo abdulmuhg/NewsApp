@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 //                    .replace(R.id.container, NewsFragment.newInstance())
 //                    .commitNow()
 //        }
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
     }
 }

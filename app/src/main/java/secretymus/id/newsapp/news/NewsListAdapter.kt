@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_news.view.*
-import kotlinx.android.synthetic.main.item_loading.view.*
 import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
@@ -93,7 +91,7 @@ class NewsListAdapter(
             view.publishTimeText.text.toString(),
             view.contentText.text.toString()
         )
-        val action = NewsFragmentDirections.actionDetailFragment(0, articleTitle, article)
+        val action = NewsFragmentDirections.actionDetailFragment(article)
         Navigation.findNavController(view).navigate(action)
     }
 
