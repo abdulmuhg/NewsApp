@@ -8,21 +8,27 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="secretymus.id.newsapp.views.NewsFragment"
-        tools:layout="@layout/fragment_news"
-        android:label="NewsFragment">
+        android:label="NewsFragment"
+        tools:layout="@layout/fragment_news">
 
         <action
             android:id="@+id/actionDetailFragment"
             app:destination="@+id/detailFragment"
-            app:enterAnim="@animator/nav_default_enter_anim"
+            app:enterAnim="@animator/nav_default_pop_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
 
+        <action
+            android:id="@+id/actionBookmarkFragment"
+            app:destination="@+id/bookmarkFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
         android:id="@+id/detailFragment"
         android:name="secretymus.id.newsapp.views.DetailFragment"
-        android:label="DetailFragment">
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
 
         <action
             android:id="@+id/actionListFragment"
@@ -35,5 +41,19 @@
             app:argType="secretymus.id.newsapp.model.Article" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/bookmarkFragment"
+        android:name="secretymus.id.newsapp.views.BookmarkFragment"
+        android:label="BookmarkFragment"
+        tools:layout="@layout/fragment_bookmark">
+
+        <action
+            android:id="@+id/actionDetailFragment"
+            app:destination="@+id/detailFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+
 
 </navigation>

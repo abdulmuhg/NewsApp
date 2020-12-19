@@ -37,21 +37,21 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         super.onCleared()
         disposable.clear()
     }
-    private fun fetchFromDatabase() {
+    fun fetchFromDatabase() {
         loading.value = true
         launch {
-            val dogs = NewsDatabase(getApplication()).newsDao().getAllArticle()
-            dogsRetrieved(dogs)
-            Toast.makeText(getApplication(), "Dogs retrieved from database", Toast.LENGTH_SHORT).show()
+            val news = NewsDatabase(getApplication()).newsDao().getAllArticle()
+            newsRetrieved(news)
+            Toast.makeText(getApplication(), "News retrieved from internal storage", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun dogsRetrieved(list: List<Article>) {
-        news.value = list
+    private fun newsRetrieved(list: List<Article>) {
+        news.postValue(list)
         newsLoadError.value = false
         loading.value = false
     }
 
-    private fun storeDogsLocally(list: List<Article>) {
+    private fun storeNewsLocally(list: List<Article>) {
         launch {
             val dao = NewsDatabase(getApplication()).newsDao()
             dao.deleteAllNews()
@@ -61,7 +61,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 list[i].uuid = result[i].toInt()
                 ++i
             }
-            dogsRetrieved(list)
+            newsRetrieved(list)
         }
     }
 

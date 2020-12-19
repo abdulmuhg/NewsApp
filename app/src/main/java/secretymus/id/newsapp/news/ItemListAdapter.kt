@@ -46,7 +46,6 @@ class ItemListAdapter(
     fun updateNewsList(nArticleList: List<Article>){
         articleList.clear()
         articleList.addAll(nArticleList)
-        articleList.add(nArticleList[0].copy())
         notifyDataSetChanged()
     }
 
@@ -92,6 +91,10 @@ class ItemListAdapter(
         )
         val action = NewsFragmentDirections.actionDetailFragment(article)
         Navigation.findNavController(view).navigate(action)
+    }
+
+    override fun onBookmarkClicked(view: View) {
+        //No Implement
     }
 
 }

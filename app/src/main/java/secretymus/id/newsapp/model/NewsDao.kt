@@ -9,6 +9,9 @@ interface NewsDao {
     @Insert
     suspend fun insertAll(vararg article: Article) : List<Long>
 
+    @Insert
+    suspend fun insert(article: Article)
+
     @Query("SELECT * FROM article")
     suspend fun getAllArticle(): List<Article>
 

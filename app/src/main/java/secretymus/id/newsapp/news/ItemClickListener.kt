@@ -4,4 +4,5 @@ import android.view.View
 
 interface ItemClickListener {
     fun onNewsClicked(view: View)
+    fun onBookmarkClicked(view: View)
 }

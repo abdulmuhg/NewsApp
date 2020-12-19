@@ -2,11 +2,10 @@ package secretymus.id.newsapp.views
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -17,20 +16,18 @@ import secretymus.id.newsapp.news.NewsViewModel
 
 class NewsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NewsFragment()
-    }
     lateinit var mlayoutManager: LinearLayoutManager
     private lateinit var viewModel: NewsViewModel
     private val newsListAdapter = ItemListAdapter(arrayListOf())
-    private var listsLoaded = arrayListOf<Article>()
 
+    private var listsLoaded = arrayListOf<Article>()
     var currentPage: Int = 1
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
@@ -99,6 +96,20 @@ class NewsFragment : Fragment() {
 
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.list_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_bookmarked -> {
+                view?.let { Navigation.findNavController(it).navigate(NewsFragmentDirections.actionBookmarkFragment()) }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
