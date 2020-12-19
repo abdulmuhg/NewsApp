@@ -48,7 +48,7 @@ class BookmarkFragment : Fragment() {
         viewModel.news.observe(viewLifecycleOwner, { news ->
             news.let {
                 articleList.visibility = View.VISIBLE
-                newsListAdapter.updateNewsList(it)
+                newsListAdapter.retrieveBookmarkList(it)
             }
         })
         viewModel.newsLoadError.observe(viewLifecycleOwner, { isError ->

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="secretymus.id.newsapp.views.NewsFragment"
-        android:label="NewsFragment"
+        android:name="secretymus.id.newsapp.views.NewsListFragment"
+        android:label="Top News"
         tools:layout="@layout/fragment_news">
 
         <action
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="secretymus.id.newsapp.views.DetailFragment"
-        android:label="DetailFragment"
+        android:label="Detail"
         tools:layout="@layout/fragment_detail">
 
         <action
@@ -45,7 +45,7 @@
     <fragment
         android:id="@+id/bookmarkFragment"
         android:name="secretymus.id.newsapp.views.BookmarkFragment"
-        android:label="BookmarkFragment"
+        android:label="Bookmark"
         tools:layout="@layout/fragment_bookmark">
 
         <action

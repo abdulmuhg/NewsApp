@@ -14,7 +14,7 @@ import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.news.ItemListAdapter
 import secretymus.id.newsapp.news.NewsViewModel
 
-class NewsFragment : Fragment() {
+class NewsListFragment : Fragment() {
 
     lateinit var mlayoutManager: LinearLayoutManager
     private lateinit var viewModel: NewsViewModel
@@ -87,9 +87,9 @@ class NewsFragment : Fragment() {
                     //findLastCompletelyVisibleItemPosition() returns position of last fully visible view.
                     ////It checks, fully visible view is the last one.
                     val lastItemAt = viewModel.news.value?.lastIndex
-                    Log.d("NewsFragment", "lastItemAt = "+ lastItemAt)
+                    Log.d("NewsListFragment", "lastItemAt = "+ lastItemAt)
                     if (mlayoutManager.findLastCompletelyVisibleItemPosition() == lastItemAt) {
-                        Log.d("NewsFragment", "Is Last Row")
+                        Log.d("NewsListFragment", "Is Last Row")
                         viewModel.loadMore(viewModel.currentPage)
                         newsListAdapter.notifyDataSetChanged()
                     }
@@ -104,9 +104,10 @@ class NewsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.action_bookmarked -> {
-                view?.let { Navigation.findNavController(it).navigate(NewsFragmentDirections.actionBookmarkFragment()) }
+                view?.let { Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
             }
         }
         return super.onOptionsItemSelected(item)

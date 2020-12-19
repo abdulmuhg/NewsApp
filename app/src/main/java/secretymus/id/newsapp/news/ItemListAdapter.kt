@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
-import secretymus.id.newsapp.views.NewsFragmentDirections
+import secretymus.id.newsapp.views.NewsListFragmentDirections
 
 class ItemListAdapter(
     private val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
@@ -22,7 +22,7 @@ class ItemListAdapter(
         const val ITEM_VIEW_TYPE_LOADING = 2
     }
 
-    override fun getItemViewType(position: Int): Int = if (position == 5) {
+    override fun getItemViewType(position: Int): Int = if (position == articleList.size-1) {
         ITEM_VIEW_TYPE_LOADING
     } else {
         ITEM_VIEW_TYPE_CONTENT
@@ -46,6 +46,13 @@ class ItemListAdapter(
     fun updateNewsList(nArticleList: List<Article>){
         articleList.clear()
         articleList.addAll(nArticleList)
+        notifyDataSetChanged()
+    }
+
+    fun retrieveBookmarkList(nArticleList: List<Article>){
+        articleList.clear()
+        articleList.addAll(nArticleList)
+        articleList.add(nArticleList[0])
         notifyDataSetChanged()
     }
 
@@ -89,7 +96,7 @@ class ItemListAdapter(
             view.publishTimeText.text.toString(),
             view.contentText.text.toString()
         )
-        val action = NewsFragmentDirections.actionDetailFragment(article)
+        val action = NewsListFragmentDirections.actionDetailFragment(article)
         Navigation.findNavController(view).navigate(action)
     }
 

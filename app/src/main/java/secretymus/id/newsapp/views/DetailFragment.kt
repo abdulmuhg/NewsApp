@@ -38,8 +38,9 @@ class DetailFragment : Fragment(), NewsActionListener {
         viewModel.fetch(mArticle)
 
         observeViewModel()
-    }
 
+    }
+    
     private fun observeViewModel() {
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer { article ->
             article?.let {
