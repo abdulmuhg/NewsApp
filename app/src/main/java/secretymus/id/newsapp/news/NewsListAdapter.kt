@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
-import secretymus.id.newsapp.model.Source
 import secretymus.id.newsapp.views.NewsFragmentDirections
 
 class NewsListAdapter(
@@ -51,6 +50,7 @@ class NewsListAdapter(
         notifyDataSetChanged()
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType){
@@ -82,8 +82,8 @@ class NewsListAdapter(
     override fun onNewsClicked(view: View) {
         val articleTitle = view.titleText.text.toString()
         val article = Article(
-            Source("1", "unknown"),
             view.categoryText.text.toString(),
+            view.author.text.toString(),
             articleTitle,
             view.description.text.toString(),
             view.url.text.toString(),

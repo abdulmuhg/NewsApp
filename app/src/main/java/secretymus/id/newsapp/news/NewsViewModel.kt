@@ -1,18 +1,21 @@
 package secretymus.id.newsapp.news
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
+import secretymus.id.newsapp.foundation.BaseViewModel
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.model.News
 import secretymus.id.newsapp.model.NewsApiService
-import secretymus.id.newsapp.model.Source
+import secretymus.id.newsapp.model.NewsDatabase
 
-class NewsViewModel : ViewModel() {
+class NewsViewModel(application: Application): BaseViewModel(application) {
 
     private val newsApiService = NewsApiService()
     private val disposable = CompositeDisposable()
@@ -33,6 +36,33 @@ class NewsViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         disposable.clear()
+    }
+    private fun fetchFromDatabase() {
+        loading.value = true
+        launch {
+            val dogs = NewsDatabase(getApplication()).newsDao().getAllArticle()
+            dogsRetrieved(dogs)
+            Toast.makeText(getApplication(), "Dogs retrieved from database", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun dogsRetrieved(list: List<Article>) {
+        news.value = list
+        newsLoadError.value = false
+        loading.value = false
+    }
+
+    private fun storeDogsLocally(list: List<Article>) {
+        launch {
+            val dao = NewsDatabase(getApplication()).newsDao()
+            dao.deleteAllNews()
+            val result = dao.insertAll(*list.toTypedArray())
+            var i = 0
+            while (i < list.size) {
+                list[i].uuid = result[i].toInt()
+                ++i
+            }
+            dogsRetrieved(list)
+        }
     }
 
     fun fetchFromRemote(page: Int) {
@@ -60,7 +90,8 @@ class NewsViewModel : ViewModel() {
     }
 
     fun getFakeData(){
-        val dummyArticle = Article(Source("", "Id"),
+        val dummyArticle = Article(
+            "unknown source",
                 "Authors",
                 "Some Sample Title",
                 "Sample description",
@@ -68,7 +99,8 @@ class NewsViewModel : ViewModel() {
                 "",
                 "10 January 2020",
                 "lorem ipsum content")
-        val dummyArticle_ = Article(Source("", "Id"),
+        val dummyArticle_ = Article(
+            "unknown source",
             "Authors 2",
             "Some Sample Title 2",
             "Sample description 2",

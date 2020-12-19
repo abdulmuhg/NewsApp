@@ -11,10 +11,11 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Article(
-        @SerializedName("source")
-        val source: Source,
-
         @ColumnInfo(name = "source")
+        @SerializedName("source")
+        val source: String,
+
+        @ColumnInfo(name = "author")
         @SerializedName("author")
         val author: String,
 

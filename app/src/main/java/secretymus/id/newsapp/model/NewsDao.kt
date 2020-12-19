@@ -7,14 +7,14 @@ import androidx.room.Query
 @Dao
 interface NewsDao {
     @Insert
-    suspend fun insertAll(vararg article: Article) : List<Article>
+    suspend fun insertAll(vararg article: Article) : List<Long>
 
     @Query("SELECT * FROM article")
     suspend fun getAllArticle(): List<Article>
 
     @Query("SELECT * FROM article WHERE uuid = :newsId")
-    suspend fun getDog(newsId: Int): Article
+    suspend fun getNews(newsId: Int): Article
 
     @Query("DELETE FROM article")
-    suspend fun deleteAllArticle()
+    suspend fun deleteAllNews()
 }
