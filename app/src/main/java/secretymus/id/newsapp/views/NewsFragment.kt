@@ -64,7 +64,7 @@ class NewsFragment : Fragment() {
             news.let {
                 articleList.visibility = View.VISIBLE
                 newsListAdapter.loadMore(it)
-                addScrollerListener(it)
+                //addScrollerListener(it)
             }
         })
         viewModel.newsLoadError.observe(viewLifecycleOwner, { isError ->
