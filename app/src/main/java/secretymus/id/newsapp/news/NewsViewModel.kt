@@ -27,10 +27,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         fetchFromRemote(1)
     }
 
-    init {
-        deleteDb()
-    }
-
     override fun onCleared() {
         super.onCleared()
         disposable.clear()

@@ -32,15 +32,6 @@ class BookmarkFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = newsListAdapter
         }
-
-        refreshLayout.setOnRefreshListener {
-            articleList.visibility = View.GONE
-            listError.visibility = View.GONE
-            loadingView.visibility = View.VISIBLE
-            viewModel.refreshBypassCache()
-            refreshLayout.isRefreshing = false
-        }
-
         observeViewModel()
     }
 
