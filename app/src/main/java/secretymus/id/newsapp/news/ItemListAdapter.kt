@@ -1,6 +1,7 @@
 package secretymus.id.newsapp.news
 
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ import secretymus.id.newsapp.views.NewsListFragmentDirections
 class ItemListAdapter(
     private val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ItemClickListener {
+
+    val urlToImage: String? = null
 
     companion object {
         const val ITEM_VIEW_TYPE_CONTENT = 1
@@ -76,17 +79,17 @@ class ItemListAdapter(
     override fun getItemCount(): Int = articleList.size
 
     override fun onNewsClicked(view: View) {
-        val articleTitle = view.titleText.text.toString()
         val article = Article(
-            null,
-            view.author.text.toString(),
-            articleTitle,
-            view.description.text.toString(),
-            view.url.text.toString(),
-            view.contentImage.resources.toString(),
-            view.publishTimeText.text.toString(),
-            view.contentText.text.toString()
+            source = null,
+            author = view.author.text.toString(),
+            title = view.titleText.text.toString(),
+            description = view.description.text.toString(),
+            url = view.url.text.toString(),
+            urlToImage = view.urlText.text.toString(),
+            publishedAt = view.publishTimeText.text.toString(),
+            content = view.contentText.text.toString()
         )
+        Log.d("Adapters", view.urlText.text.toString()+"")
         val action = NewsListFragmentDirections.actionDetailFragment(article)
         Navigation.findNavController(view).navigate(action)
     }

@@ -79,7 +79,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 "Some Sample Title",
                 "Sample description",
                 "",
-                "",
+                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
                 "10 January 2020",
                 "lorem ipsum content")
         val dummyArticle_ = Article(
@@ -88,7 +88,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
             "Some Sample Title 2",
             "Sample description 2",
             "",
-            "",
+            "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
             "11 January 2020",
             "lorem ipsum content content")
         news.postValue(

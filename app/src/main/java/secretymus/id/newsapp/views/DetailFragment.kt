@@ -1,15 +1,20 @@
 package secretymus.id.newsapp.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import kotlinx.android.synthetic.main.fragment_detail.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.FragmentDetailBinding
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.news.DetailViewModel
 import secretymus.id.newsapp.news.NewsActionListener
+import secretymus.id.newsapp.utils.getProgressDrawable
 import secretymus.id.newsapp.utils.toast
 
 class DetailFragment : Fragment(), NewsActionListener {
@@ -28,22 +33,33 @@ class DetailFragment : Fragment(), NewsActionListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         arguments?.let {
             mArticle = DetailFragmentArgs.fromBundle(it).mArticle
+
+            val urlToImg = mArticle.urlToImage
+            Log.d("DetailFragment", urlToImg!!)
+
         }
 
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
         viewModel.fetch(mArticle)
-
         observeViewModel()
-
     }
     
     private fun observeViewModel() {
         viewModel.newsLiveData.observe(viewLifecycleOwner, { article ->
             article?.let {
                 dataBinding.article = mArticle
+
+                it.urlToImage?.let {url ->
+                    val options = RequestOptions()
+                            .placeholder(getProgressDrawable(requireContext()))
+                            .error(R.drawable.ic_photo)
+                    Glide.with(requireContext())
+                            .setDefaultRequestOptions(options)
+                            .load(url)
+                            .into(contentImages)
+                }
             }
         })
     }
@@ -64,7 +80,7 @@ class DetailFragment : Fragment(), NewsActionListener {
     }
 
     override fun onSavingNews() {
-        context?.toast("News has been saved")
+        activity?.toast("News has been saved")
     }
 
 

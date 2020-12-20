@@ -10,6 +10,10 @@
             type="secretymus.id.newsapp.model.Article" />
 
         <variable
+            name="adapterVal"
+            type="secretymus.id.newsapp.news.ItemListAdapter" />
+
+        <variable
             name="listener"
             type="secretymus.id.newsapp.news.ItemClickListener" />
     </data>
@@ -27,11 +31,20 @@
             android:gravity="start"
             android:onClick="@{listener::onNewsClicked}">
 
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/urlText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{article.urlToImage}"/>
             <ImageView
                 android:id="@+id/contentImage"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:imageUrl="@{article.urlToImage}"
+                android:src="@{adapterVal.urlToImage}"
                 android:scaleType="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

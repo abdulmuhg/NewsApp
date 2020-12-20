@@ -36,7 +36,8 @@ class NewsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.fetchFromRemote(currentPage)
+        //viewModel.fetchFromRemote(currentPage)
+        viewModel.getFakeData()
 
         articleList.apply {
             mlayoutManager = LinearLayoutManager(context)
@@ -51,7 +52,6 @@ class NewsListFragment : Fragment() {
             viewModel.refreshBypassCache()
             refreshLayout.isRefreshing = false
         }
-
         observeViewModel()
     }
 
