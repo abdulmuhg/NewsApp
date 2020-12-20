@@ -15,8 +15,8 @@ import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
 class ItemListAdapter(
-    private val articleList: ArrayList<Article>): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-    ItemClickListener {
+        private val articleList: ArrayList<Article>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+        ItemClickListener {
 
     val urlToImage: String? = null
 
@@ -25,7 +25,7 @@ class ItemListAdapter(
         const val ITEM_VIEW_TYPE_LOADING = 2
     }
 
-    override fun getItemViewType(position: Int): Int = if (position == articleList.size-1) {
+    override fun getItemViewType(position: Int): Int = if ( articleList.size > 5 && position == articleList.size - 1 ) {
         ITEM_VIEW_TYPE_LOADING
     } else {
         ITEM_VIEW_TYPE_CONTENT
@@ -33,7 +33,7 @@ class ItemListAdapter(
 
     fun loadMore(nArticleList: List<Article>) {
         val handler = Handler()
-        handler.postDelayed( {
+        handler.postDelayed({
             if (articleList.size > 0) {
                 articleList.apply {
                     removeAt(articleList.size - 1)
@@ -45,16 +45,19 @@ class ItemListAdapter(
         }, 2500)
     }
 
-    fun retrieveBookmarkList(nArticleList: List<Article>){
-        articleList.clear()
+    fun retrieveBookmarkList(nArticleList: List<Article>) {
+        if (articleList.size > 0) {
+            articleList.apply {
+                removeAt(articleList.size - 1)
+            }
+        }
         articleList.addAll(nArticleList)
-        if (articleList.size > 0){ articleList.add(nArticleList[0]) }
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when (viewType){
+        return when (viewType) {
             ITEM_VIEW_TYPE_CONTENT -> {
                 NewsViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_news, parent, false))
             }
@@ -66,13 +69,13 @@ class ItemListAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is NewsViewHolder){
+        if (holder is NewsViewHolder) {
             holder.view.article = articleList[position]
             holder.view.listener = this
         }
     }
 
-    class NewsViewHolder(var view: ItemNewsBinding): RecyclerView.ViewHolder(view.root)
+    class NewsViewHolder(var view: ItemNewsBinding) : RecyclerView.ViewHolder(view.root)
 
     class ViewHolderLoading(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
@@ -80,16 +83,16 @@ class ItemListAdapter(
 
     override fun onNewsClicked(view: View) {
         val article = Article(
-            source = null,
-            author = view.author.text.toString(),
-            title = view.titleText.text.toString(),
-            description = view.description.text.toString(),
-            url = view.url.text.toString(),
-            urlToImage = view.urlText.text.toString(),
-            publishedAt = view.publishTimeText.text.toString(),
-            content = view.contentText.text.toString()
+                source = null,
+                author = view.author.text.toString(),
+                title = view.titleText.text.toString(),
+                description = view.description.text.toString(),
+                url = view.url.text.toString(),
+                urlToImage = view.urlText.text.toString(),
+                publishedAt = view.publishTimeText.text.toString(),
+                content = view.contentText.text.toString()
         )
-        Log.d("Adapters", view.urlText.text.toString()+"")
+        Log.d("Adapters", view.urlText.text.toString() + "")
         val action = NewsListFragmentDirections.actionDetailFragment(article)
         Navigation.findNavController(view).navigate(action)
     }
