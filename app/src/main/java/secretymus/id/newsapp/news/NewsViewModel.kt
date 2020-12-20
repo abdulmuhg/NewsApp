@@ -9,24 +9,26 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
+import secretymus.id.newsapp.database.NewsDatabase
 import secretymus.id.newsapp.foundation.BaseViewModel
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.model.News
 import secretymus.id.newsapp.network.NewsApiService
-import secretymus.id.newsapp.database.NewsDatabase
 
 class NewsViewModel(application: Application): BaseViewModel(application) {
 
     private val newsApiService = NewsApiService()
     private val disposable = CompositeDisposable()
-
-    var currentPage: Int = 1
     val news = MutableLiveData<List<Article>>()
     val newsLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
     fun refreshBypassCache() {
-        fetchFromRemote(currentPage)
+        fetchFromRemote(1)
+    }
+
+    init {
+        deleteDb()
     }
 
     override fun onCleared() {
@@ -47,7 +49,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         loading.value = false
     }
 
-    private fun fetchFromRemote(page: Int) {
+    fun fetchFromRemote(page: Int) {
         loading.value = true
         disposable.add(
             newsApiService.getNews(page)
@@ -58,7 +60,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                         news.postValue(_news.articles)
                         newsLoadError.value = false
                         loading.value = false
-                        currentPage++
                     }
 
                     override fun onError(e: Throwable) {
@@ -73,7 +74,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
 
     fun getFakeData(){
         val dummyArticle = Article(
-            "unknown source",
+            null,
                 "Authors",
                 "Some Sample Title",
                 "Sample description",
@@ -82,7 +83,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 "10 January 2020",
                 "lorem ipsum content")
         val dummyArticle_ = Article(
-            "unknown source",
+            null,
             "Authors 2",
             "Some Sample Title 2",
             "Sample description 2",
@@ -103,7 +104,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         )
         newsLoadError.value = false
         loading.value = false
-        currentPage++
     }
 
     fun loadMore(page: Int) {
@@ -116,7 +116,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                                 news.postValue(_news.articles)
                                 newsLoadError.value = false
                                 loading.value = false
-                                currentPage++
                             }
 
                             override fun onError(e: Throwable) {
@@ -128,6 +127,11 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                         })
         )
     }
-
+    fun deleteDb() {
+        launch {
+            val dao = NewsDatabase(getApplication()).newsDao()
+            dao.deleteAllNews()
+        }
+    }
 
 }

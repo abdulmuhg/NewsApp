@@ -36,7 +36,7 @@ class NewsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.getFakeData()
+        viewModel.fetchFromRemote(currentPage)
 
         articleList.apply {
             mlayoutManager = LinearLayoutManager(context)
@@ -88,7 +88,8 @@ class NewsListFragment : Fragment() {
                     Log.d("NewsListFragment", "lastItemAt = $lastItemAt")
                     if (mlayoutManager.findLastCompletelyVisibleItemPosition() == lastItemAt) {
                         Log.d("NewsListFragment", "Is Last Row")
-                        viewModel.loadMore(viewModel.currentPage)
+                        viewModel.loadMore(currentPage)
+                        currentPage++
                         newsListAdapter.notifyDataSetChanged()
                     }
 

@@ -45,7 +45,7 @@ class ItemListAdapter(
     fun retrieveBookmarkList(nArticleList: List<Article>){
         articleList.clear()
         articleList.addAll(nArticleList)
-        articleList.add(nArticleList[0])
+        if (articleList.size > 0){ articleList.add(nArticleList[0]) }
         notifyDataSetChanged()
     }
 
@@ -78,7 +78,7 @@ class ItemListAdapter(
     override fun onNewsClicked(view: View) {
         val articleTitle = view.titleText.text.toString()
         val article = Article(
-            view.categoryText.text.toString(),
+            null,
             view.author.text.toString(),
             articleTitle,
             view.description.text.toString(),

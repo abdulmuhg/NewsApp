@@ -2,6 +2,7 @@ package secretymus.id.newsapp.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
@@ -11,9 +12,9 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Article(
-        @ColumnInfo(name = "source")
         @SerializedName("source")
-        val source: String,
+        @Embedded(prefix = "_source")
+        val source: Source?,
 
         @ColumnInfo(name = "author")
         @SerializedName("author")
@@ -60,9 +61,13 @@ data class News(
 )
 
 @Parcelize
+@Entity(tableName = "sources")
 data class Source(
+        @PrimaryKey
+        @ColumnInfo
         @SerializedName("id")
-        val id: String?,
+        val id: String,
+        @ColumnInfo
         @SerializedName("name")
         var name: String
 ) : Parcelable
