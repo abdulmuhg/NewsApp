@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 import secretymus.id.newsapp.R
-import secretymus.id.newsapp.news.ItemListAdapter
-import secretymus.id.newsapp.news.NewsViewModel
+import secretymus.id.newsapp.bookmark.BookmarkAdapter
+import secretymus.id.newsapp.bookmark.BookmarkViewModel
 
 class BookmarkFragment : Fragment() {
 
-    private lateinit var viewModel: NewsViewModel
-    private val newsListAdapter = ItemListAdapter(arrayListOf())
+    private lateinit var viewModel: BookmarkViewModel
+    private val newsListAdapter = BookmarkAdapter(arrayListOf())
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,13 +25,12 @@ class BookmarkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.fetchFromDatabase()
-
+        viewModel = ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
         articleList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newsListAdapter
         }
+        viewModel.fetchFromDatabase()
         observeViewModel()
     }
 

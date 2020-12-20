@@ -1,6 +1,5 @@
-package secretymus.id.newsapp.news
+package secretymus.id.newsapp.bookmark
 
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +11,13 @@ import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
+import secretymus.id.newsapp.news.ItemClickListener
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
-class ItemListAdapter(
+class BookmarkAdapter(
         private val articleList: ArrayList<Article>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
         ItemClickListener {
-
-    val urlToImage: String? = null
-
-    val dummyArticle = Article(
+    private val dummyArticle = Article(
             null,
             "",
             "",
@@ -29,31 +26,6 @@ class ItemListAdapter(
             "",
             "",
             "")
-
-    companion object {
-        const val ITEM_VIEW_TYPE_CONTENT = 1
-        const val ITEM_VIEW_TYPE_LOADING = 2
-    }
-
-    override fun getItemViewType(position: Int): Int = if ( position == articleList.lastIndex) {
-        ITEM_VIEW_TYPE_LOADING
-    } else {
-        ITEM_VIEW_TYPE_CONTENT
-    }
-
-    fun loadMore(nArticleList: List<Article>) {
-        val handler = Handler()
-        handler.postDelayed({
-            if (articleList.size > 0) {
-                articleList.apply {
-                    removeAt(articleList.lastIndex)
-                }
-            }
-            articleList.addAll(nArticleList)
-            articleList.add(nArticleList[0].copy())
-            notifyDataSetChanged()
-        }, 2500)
-    }
 
     fun retrieveBookmarkList(nArticleList: List<Article>) {
         articleList.clear()
@@ -65,15 +37,7 @@ class ItemListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return when (viewType) {
-            ITEM_VIEW_TYPE_CONTENT -> {
-                NewsViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_news, parent, false))
-            }
-            else -> {
-                ViewHolderLoading(inflater.inflate(R.layout.item_loading, parent, false))
-            }
-        }
-
+        return NewsViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_news, parent, false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -84,8 +48,6 @@ class ItemListAdapter(
     }
 
     class NewsViewHolder(var view: ItemNewsBinding) : RecyclerView.ViewHolder(view.root)
-
-    class ViewHolderLoading(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
     override fun getItemCount(): Int = articleList.size
 
@@ -108,5 +70,6 @@ class ItemListAdapter(
     override fun onBookmarkClicked(view: View) {
         //No Implement
     }
-
 }
+
+
