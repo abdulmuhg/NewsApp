@@ -11,7 +11,7 @@
 
         <variable
             name="adapterVal"
-            type="secretymus.id.newsapp.news.ItemListAdapter" />
+            type="secretymus.id.newsapp.news.NewsListAdapter" />
 
         <variable
             name="listener"

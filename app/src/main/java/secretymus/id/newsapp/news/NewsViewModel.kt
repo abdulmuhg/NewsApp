@@ -2,7 +2,6 @@ package secretymus.id.newsapp.news
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -24,36 +23,25 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
     val loading = MutableLiveData<Boolean>()
 
     fun refreshBypassCache() {
-        fetchFromRemote(1)
+        fetchFromRemote()
     }
 
     override fun onCleared() {
         super.onCleared()
         disposable.clear()
     }
-    fun fetchFromDatabase() {
-        loading.value = true
-        launch {
-            val news = NewsDatabase(getApplication()).newsDao().getAllArticle()
-            newsRetrieved(news)
-            Toast.makeText(getApplication(), "News retrieved from internal storage", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private fun newsRetrieved(list: List<Article>) {
-        news.postValue(list)
-        newsLoadError.value = false
-        loading.value = false
-    }
 
-    fun fetchFromRemote(page: Int) {
+
+
+    fun fetchFromRemote() {
         loading.value = true
         disposable.add(
-            newsApiService.getNews(page)
+            newsApiService.getNews(1)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<News>() {
                     override fun onSuccess(_news: News) {
-                        news.postValue(_news.articles)
+                        news.value = _news.articles
                         newsLoadError.value = false
                         loading.value = false
                     }
@@ -66,40 +54,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                     }
                 })
         )
-    }
-
-    fun getFakeData(){
-        val dummyArticle = Article(
-            null,
-                "Authors",
-                "Some Sample Title",
-                "Sample description",
-                "",
-                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-                "10 January 2020",
-                "lorem ipsum content")
-        val dummyArticle_ = Article(
-            null,
-            "Authors 2",
-            "Some Sample Title 2",
-            "Sample description 2",
-            "",
-            "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-            "11 January 2020",
-            "lorem ipsum content content")
-        news.postValue(
-                listOf(
-                        dummyArticle_,
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        )
-        )
-        newsLoadError.value = false
-        loading.value = false
     }
 
     fun loadMore(page: Int) {
@@ -123,6 +77,47 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                         })
         )
     }
+
+    fun newsRetrieved(list: List<Article>) {
+        news.postValue(list)
+        newsLoadError.value = false
+        loading.value = false
+    }
+
+    fun getFakeData(){
+        val dummyArticle = Article(
+                null,
+                "Authors",
+                "Some Sample Title",
+                "Sample description",
+                "",
+                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
+                "10 January 2020",
+                "lorem ipsum content")
+        val dummyArticle_ = Article(
+                null,
+                "Authors 2",
+                "Some Sample Title 2",
+                "Sample description 2",
+                "",
+                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
+                "11 January 2020",
+                "lorem ipsum content content")
+        news.postValue(
+                listOf(
+                        dummyArticle_,
+                        dummyArticle.copy(),
+                        dummyArticle.copy(),
+                        dummyArticle.copy(),
+                        dummyArticle.copy(),
+                        dummyArticle.copy(),
+                        dummyArticle.copy(),
+                )
+        )
+        newsLoadError.value = false
+        loading.value = false
+    }
+
     fun deleteDb() {
         launch {
             val dao = NewsDatabase(getApplication()).newsDao()

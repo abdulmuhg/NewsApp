@@ -14,13 +14,13 @@ import secretymus.id.newsapp.databinding.ItemNewsBinding
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
-class ItemListAdapter(
+class NewsListAdapter(
         private val articleList: ArrayList<Article>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
         ItemClickListener {
 
     val urlToImage: String? = null
 
-    val dummyArticle = Article(
+    private val dummyArticle = Article(
             null,
             "",
             "",
@@ -50,17 +50,9 @@ class ItemListAdapter(
                 }
             }
             articleList.addAll(nArticleList)
-            articleList.add(nArticleList[0].copy())
+            articleList.add(dummyArticle)
             notifyDataSetChanged()
         }, 2500)
-    }
-
-    fun retrieveBookmarkList(nArticleList: List<Article>) {
-        articleList.clear()
-        articleList.addAll(nArticleList)
-        articleList.add(dummyArticle)
-        articleList.removeAt(articleList.lastIndex)
-        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

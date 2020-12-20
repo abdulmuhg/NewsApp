@@ -2,7 +2,8 @@
     <string name="app_name">News App</string>
     <string name="content_image">content_image</string>
     <string name="save">Save</string>
-    <string name="fetch_error_message">An error occured while loading data</string>
+    <string name="fetch_error_message">An error occurred while loading data</string>
     <string name="search">Search</string>
     <string name="bookmark">Bookmark</string>
+    <string name="detail_image">detail image</string>
 </resources>

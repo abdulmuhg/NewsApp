@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navController = findNavController(R.id.fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
-        val dao = NewsDatabase(getApplication()).newsDao()
     }
 
 }
