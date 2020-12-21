@@ -7,7 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
 import secretymus.id.newsapp.database.NewsDatabase
 import secretymus.id.newsapp.foundation.BaseViewModel
-import secretymus.id.newsapp.models.Article
+import secretymus.id.newsapp.model.Article
 
 class BookmarkViewModel (application: Application): BaseViewModel(application) {
     private val disposable = CompositeDisposable()

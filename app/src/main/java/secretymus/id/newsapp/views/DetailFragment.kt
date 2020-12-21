@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_detail.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.FragmentDetailBinding
-import secretymus.id.newsapp.models.Article
+import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.news.DetailViewModel
 import secretymus.id.newsapp.news.NewsActionListener
 import secretymus.id.newsapp.utils.getProgressDrawable

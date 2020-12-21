@@ -36,8 +36,8 @@ class NewsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.refreshBypassCache()
-        //viewModel.getFakeData()
+        //viewModel.refreshBypassCache()
+        viewModel.getFakeData()
         articleList.apply {
             mLayoutManager = LinearLayoutManager(context)
             layoutManager = mLayoutManager
@@ -52,7 +52,10 @@ class NewsListFragment : Fragment() {
         }
         observeViewModel()
         addScrollerListener()
+
+
     }
+
 
     private fun observeViewModel() {
         viewModel.news.observe(viewLifecycleOwner, { news ->
@@ -60,7 +63,6 @@ class NewsListFragment : Fragment() {
                 articleList.visibility = View.VISIBLE
                 if (!it.isNullOrEmpty()){
                     Log.d("NewsFragment", "Cant get more from API")
-                    Toast.makeText(context, "Cant get more from database", Toast.LENGTH_SHORT).show()
                     newsListAdapter.loadMore(it)
                 }
             }
@@ -112,7 +114,8 @@ class NewsListFragment : Fragment() {
 
         when (item.itemId) {
             R.id.action_bookmarked -> {
-                view?.let { Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
+                view?.let {
+                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
             }
         }
         return super.onOptionsItemSelected(item)

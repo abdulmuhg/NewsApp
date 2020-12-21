@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
-import secretymus.id.newsapp.models.Article
+import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
 class NewsListAdapter(

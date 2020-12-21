@@ -10,8 +10,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import secretymus.id.newsapp.database.NewsDatabase
 import secretymus.id.newsapp.foundation.BaseViewModel
-import secretymus.id.newsapp.models.Article
-import secretymus.id.newsapp.models.News
+import secretymus.id.newsapp.model.Article
+import secretymus.id.newsapp.model.News
 import secretymus.id.newsapp.network.NewsApiService
 
 class NewsViewModel(application: Application): BaseViewModel(application) {

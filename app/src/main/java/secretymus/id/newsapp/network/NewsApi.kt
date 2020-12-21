@@ -3,7 +3,7 @@ package secretymus.id.newsapp.network
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import secretymus.id.newsapp.models.News
+import secretymus.id.newsapp.model.News
 
 interface NewsApi {
     @GET("top-headlines")

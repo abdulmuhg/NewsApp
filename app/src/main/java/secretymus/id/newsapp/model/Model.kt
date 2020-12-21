@@ -1,4 +1,4 @@
-package secretymus.id.newsapp.models
+package secretymus.id.newsapp.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
