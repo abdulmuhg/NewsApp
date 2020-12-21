@@ -1,4 +1,4 @@
-package secretymus.id.newsapp.activity
+package secretymus.id.newsapp.views
 
 import android.content.Intent
 import android.os.Bundle

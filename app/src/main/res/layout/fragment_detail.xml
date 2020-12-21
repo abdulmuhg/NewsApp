@@ -6,7 +6,7 @@
     <data>
         <variable
             name="article"
-            type="secretymus.id.newsapp.model.Article" />
+            type="secretymus.id.newsapp.models.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

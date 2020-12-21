@@ -1,13 +1,10 @@
-package secretymus.id.newsapp.activity
+package secretymus.id.newsapp.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import kotlinx.coroutines.launch
 import secretymus.id.newsapp.R
-import secretymus.id.newsapp.database.NewsDatabase
-import secretymus.id.newsapp.model.Article
 
 class MainActivity : AppCompatActivity() {
 

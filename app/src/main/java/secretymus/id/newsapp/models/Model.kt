@@ -1,4 +1,4 @@
-package secretymus.id.newsapp.model
+package secretymus.id.newsapp.models
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -7,6 +7,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Entity
@@ -44,6 +45,7 @@ data class Article(
         @SerializedName("content")
         val content: String
 ) : Parcelable {
+        @IgnoredOnParcel
         @PrimaryKey(autoGenerate = true)
         var uuid: Int = 0
 }

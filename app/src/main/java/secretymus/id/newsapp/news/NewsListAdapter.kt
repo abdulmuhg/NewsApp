@@ -1,6 +1,7 @@
 package secretymus.id.newsapp.news
 
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
-import secretymus.id.newsapp.model.Article
+import secretymus.id.newsapp.models.Article
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
 class NewsListAdapter(
@@ -42,8 +43,7 @@ class NewsListAdapter(
     }
 
     fun loadMore(nArticleList: List<Article>) {
-        val handler = Handler()
-        handler.postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             if (articleList.size > 0) {
                 articleList.apply {
                     removeAt(articleList.lastIndex)
