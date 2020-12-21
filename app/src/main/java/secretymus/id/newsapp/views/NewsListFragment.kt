@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,9 +34,9 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        //viewModel.refreshBypassCache()
-        viewModel.getFakeData()
+        viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
+        viewModel.refreshBypassCache()
+        //viewModel.getFakeData()
         articleList.apply {
             mLayoutManager = LinearLayoutManager(context)
             layoutManager = mLayoutManager
