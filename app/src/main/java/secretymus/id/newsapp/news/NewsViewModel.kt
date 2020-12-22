@@ -33,7 +33,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
 
 
 
-    fun fetchFromRemote() {
+    private fun fetchFromRemote() {
         loading.value = true
         disposable.add(
             newsApiService.getNews(1)

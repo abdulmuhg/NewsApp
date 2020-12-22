@@ -15,7 +15,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-fun Context.toast(message : String){
+
+fun Context.toast(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 

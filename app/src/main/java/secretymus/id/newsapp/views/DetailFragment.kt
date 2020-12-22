@@ -66,7 +66,14 @@ class DetailFragment : Fragment(), NewsActionListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.detail_menu, menu)
+        arguments?.let {
+            mArticle = DetailFragmentArgs.fromBundle(it).mArticle
+            if (mArticle.source?.id == "b_c_v"){
+                return
+            } else {
+                inflater.inflate(R.menu.detail_menu, menu)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

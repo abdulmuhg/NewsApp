@@ -6,4 +6,6 @@
     <string name="search">Search</string>
     <string name="bookmark">Bookmark</string>
     <string name="detail_image">detail image</string>
+    <string name="powered_by">Powered by</string>
+    <string name="app_icon">app icon</string>
 </resources>

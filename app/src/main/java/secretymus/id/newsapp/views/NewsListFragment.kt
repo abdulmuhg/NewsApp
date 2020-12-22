@@ -52,7 +52,6 @@ class NewsListFragment : Fragment() {
         observeViewModel()
         addScrollerListener()
 
-
     }
 
 
@@ -62,8 +61,8 @@ class NewsListFragment : Fragment() {
                 articleList.visibility = View.VISIBLE
                 if (!it.isNullOrEmpty()){
                     Log.d("NewsFragment", "Cant get more from API")
-                    newsListAdapter.loadMore(it)
                 }
+                newsListAdapter.loadMore(it)
             }
         })
         viewModel.newsLoadError.observe(viewLifecycleOwner, { isError ->

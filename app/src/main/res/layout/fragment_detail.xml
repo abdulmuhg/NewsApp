@@ -26,7 +26,17 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/titleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@{article.title}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/author"
+                    tools:text="Studi: Konsumsi Vitamin D Kurangi Risiko Kanker - CNN Indonesia" />
                 <ImageView
                     android:id="@+id/contentImages"
                     android:layout_width="match_parent"
@@ -62,32 +72,19 @@
                         android:text="@{article.publishedAt}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                         tools:text="10 Januari 2020 | 10:12" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{article.author}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                        android:textStyle="italic"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/categoryText"
+                        tools:text="Abdul" />
+
                 </LinearLayout>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@{article.author}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:textStyle="italic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/categoryText"
-                    tools:text="Abbdul" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/titleText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@{article.title}"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/author"
-                    tools:text="Studi: Konsumsi Vitamin D Kurangi Risiko Kanker - CNN Indonesia" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
