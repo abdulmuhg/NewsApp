@@ -35,8 +35,8 @@ class NewsListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-        viewModel.refreshBypassCache()
-        //viewModel.getFakeData()
+        //viewModel.refreshBypassCache()
+        viewModel.getFakeData()
         articleList.apply {
             mLayoutManager = LinearLayoutManager(context)
             layoutManager = mLayoutManager

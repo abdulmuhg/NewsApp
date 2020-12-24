@@ -31,8 +31,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
         disposable.clear()
     }
 
-
-
     private fun fetchFromRemote() {
         loading.value = true
         disposable.add(
@@ -92,7 +90,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 "Sample description",
                 "",
                 "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-                "10 January 2020",
+                "2020-01-10T20:45:00Z",
                 "lorem ipsum content")
         val dummyArticle_ = Article(
                 null,
@@ -101,7 +99,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 "Sample description 2",
                 "",
                 "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-                "11 January 2020",
+                "2020-01-10T20:45:00Z",
                 "lorem ipsum content content")
         news.postValue(
                 listOf(
