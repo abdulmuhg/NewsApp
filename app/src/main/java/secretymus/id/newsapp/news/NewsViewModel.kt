@@ -38,6 +38,7 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<News>() {
+
                     override fun onSuccess(_news: News) {
                         news.value = _news.articles
                         newsLoadError.value = false
@@ -74,12 +75,6 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
                             }
                         })
         )
-    }
-
-    fun newsRetrieved(list: List<Article>) {
-        news.postValue(list)
-        newsLoadError.value = false
-        loading.value = false
     }
 
     fun getFakeData(){

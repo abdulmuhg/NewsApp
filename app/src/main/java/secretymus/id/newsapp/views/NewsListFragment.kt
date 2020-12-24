@@ -9,6 +9,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_news.*
@@ -31,29 +32,44 @@ class NewsListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        shimmerFrameLayout.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        shimmerFrameLayout.stopShimmerAnimation()
+        super.onPause()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-        //viewModel.refreshBypassCache()
-        viewModel.getFakeData()
         articleList.apply {
             mLayoutManager = LinearLayoutManager(context)
             layoutManager = mLayoutManager
             adapter = newsListAdapter
         }
+        articleList.addItemDecoration(
+            DividerItemDecoration(
+                articleList.context,
+                (articleList.layoutManager as LinearLayoutManager).orientation
+            )
+        )
         refreshLayout.setOnRefreshListener {
             articleList.visibility = View.GONE
             listError.visibility = View.GONE
-            loadingView.visibility = View.VISIBLE
+            shimmerFrameLayout.visibility = View.VISIBLE
             viewModel.refreshBypassCache()
             refreshLayout.isRefreshing = false
         }
+
+        //viewModel.refreshBypassCache()
+        viewModel.getFakeData()
         observeViewModel()
         addScrollerListener()
-
     }
-
 
     private fun observeViewModel() {
         viewModel.news.observe(viewLifecycleOwner, { news ->
@@ -68,12 +84,13 @@ class NewsListFragment : Fragment() {
         viewModel.newsLoadError.observe(viewLifecycleOwner, { isError ->
             isError?.let {
                 listError.visibility = if (it) View.VISIBLE else View.GONE
+                shimmerFrameLayout.visibility = View.GONE
             }
         })
 
         viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
             isLoading?.let {
-                loadingView.visibility = if (it) View.VISIBLE else View.GONE
+                shimmerFrameLayout.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
                     listError.visibility = View.GONE
                     articleList.visibility = View.GONE
@@ -109,7 +126,6 @@ class NewsListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {
             R.id.action_bookmarked -> {
                 view?.let {
