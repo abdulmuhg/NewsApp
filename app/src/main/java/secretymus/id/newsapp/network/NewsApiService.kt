@@ -21,6 +21,6 @@ class NewsApiService {
 
     companion object {
         private const val BASE_URL = "https://newsapi.org/v2/"
-        private const val COUNTRY_IDN_VALUE = "id"
+        private const val COUNTRY_IDN_VALUE = "us"
     }
 }

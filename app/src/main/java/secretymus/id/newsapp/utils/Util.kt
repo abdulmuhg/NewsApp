@@ -45,11 +45,13 @@ fun loadImage(view: ImageView, url: String?) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun TextView.dateFormat(inputFormat: String?){
-    val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX", Locale.ENGLISH)
-    val outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
-    val date = LocalDate.parse(inputFormat, inputFormatter)
-    val formattedDate = outputFormatter.format(date)
-    this.text = formattedDate
+    if (inputFormat != null) {
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX", Locale.ENGLISH)
+        val outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH)
+        val date = LocalDate.parse(inputFormat, inputFormatter)
+        val formattedDate = outputFormatter.format(date)
+        this.text = formattedDate
+    }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)

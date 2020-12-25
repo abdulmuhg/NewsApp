@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="secretymus.id.newsapp.views.NewsListFragment"
-        android:label="Top News"
+        android:label="The Fortnightly"
         tools:layout="@layout/fragment_news">
 
         <action

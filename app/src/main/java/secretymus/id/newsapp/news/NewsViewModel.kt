@@ -14,7 +14,8 @@ import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.model.News
 import secretymus.id.newsapp.network.NewsApiService
 
-class NewsViewModel(application: Application): BaseViewModel(application) {
+
+class NewsViewModel(application: Application) : BaseViewModel(application) {
 
     private val newsApiService = NewsApiService()
     private val disposable = CompositeDisposable()
@@ -57,55 +58,57 @@ class NewsViewModel(application: Application): BaseViewModel(application) {
 
     fun loadMore(page: Int) {
         disposable.add(
-                newsApiService.getNews(page)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(object : DisposableSingleObserver<News>() {
-                            override fun onSuccess(_news: News) {
-                                news.postValue(_news.articles)
-                                newsLoadError.value = false
-                                loading.value = false
-                            }
+            newsApiService.getNews(page)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<News>() {
+                    override fun onSuccess(_news: News) {
+                        news.postValue(_news.articles)
+                        newsLoadError.value = false
+                        loading.value = false
+                    }
 
-                            override fun onError(e: Throwable) {
-                                newsLoadError.value = true
-                                loading.value = false
-                                e.printStackTrace()
-                                Log.e("API", e.message.toString())
-                            }
-                        })
+                    override fun onError(e: Throwable) {
+                        newsLoadError.value = true
+                        loading.value = false
+                        e.printStackTrace()
+                        Log.e("API", e.message.toString())
+                    }
+                })
         )
     }
 
-    fun getFakeData(){
+    fun getFakeData() {
         val dummyArticle = Article(
-                null,
-                "Authors",
-                "Some Sample Title",
-                "Sample description",
-                "",
-                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-                "2020-01-10T20:45:00Z",
-                "lorem ipsum content")
+            null,
+            "Authors",
+            "Some Sample Title",
+            "Sample description",
+            "",
+            "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
+            "2020-01-10T20:45:00Z",
+            "lorem ipsum content"
+        )
         val dummyArticle_ = Article(
-                null,
-                "Authors 2",
-                "Some Sample Title 2",
-                "Sample description 2",
-                "",
-                "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
-                "2020-01-10T20:45:00Z",
-                "lorem ipsum content content")
+            null,
+            "Authors 2",
+            "Some Sample Title 2",
+            "Sample description 2",
+            "",
+            "https://www.newsbtc.com/wp-content/uploads/2020/12/shutterstock_1414215365.jpg",
+            "2020-01-10T20:45:00Z",
+            "lorem ipsum content content"
+        )
         news.postValue(
-                listOf(
-                        dummyArticle_,
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                        dummyArticle.copy(),
-                )
+            listOf(
+                dummyArticle_,
+                dummyArticle.copy(),
+                dummyArticle.copy(),
+                dummyArticle.copy(),
+                dummyArticle.copy(),
+                dummyArticle.copy(),
+                dummyArticle.copy(),
+            )
         )
         newsLoadError.value = false
         loading.value = false

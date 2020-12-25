@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +24,8 @@ class NewsListFragment : Fragment() {
     var currentPage: Int = 1
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_news, container, false)
@@ -51,22 +50,23 @@ class NewsListFragment : Fragment() {
             layoutManager = mLayoutManager
             adapter = newsListAdapter
         }
+        refreshLayout.setOnRefreshListener {
+            shimmerFrameLayout.visibility = View.VISIBLE
+            chipsContainer.visibility = View.GONE
+            articleList.visibility = View.GONE
+            listError.visibility = View.GONE
+            viewModel.refreshBypassCache()
+            refreshLayout.isRefreshing = false
+        }
         articleList.addItemDecoration(
             DividerItemDecoration(
                 articleList.context,
                 (articleList.layoutManager as LinearLayoutManager).orientation
             )
         )
-        refreshLayout.setOnRefreshListener {
-            articleList.visibility = View.GONE
-            listError.visibility = View.GONE
-            shimmerFrameLayout.visibility = View.VISIBLE
-            viewModel.refreshBypassCache()
-            refreshLayout.isRefreshing = false
-        }
 
-        //viewModel.refreshBypassCache()
-        viewModel.getFakeData()
+        viewModel.refreshBypassCache()
+        //viewModel.getFakeData()
         observeViewModel()
         addScrollerListener()
     }
@@ -75,7 +75,8 @@ class NewsListFragment : Fragment() {
         viewModel.news.observe(viewLifecycleOwner, { news ->
             news.let {
                 articleList.visibility = View.VISIBLE
-                if (!it.isNullOrEmpty()){
+                chipsContainer.visibility = View.VISIBLE
+                if (!it.isNullOrEmpty()) {
                     Log.d("NewsFragment", "Cant get more from API")
                 }
                 newsListAdapter.loadMore(it)
@@ -85,6 +86,7 @@ class NewsListFragment : Fragment() {
             isError?.let {
                 listError.visibility = if (it) View.VISIBLE else View.GONE
                 shimmerFrameLayout.visibility = View.GONE
+                //chipsContainer.visibility = View.GONE
             }
         })
 
@@ -94,6 +96,7 @@ class NewsListFragment : Fragment() {
                 if (it) {
                     listError.visibility = View.GONE
                     articleList.visibility = View.GONE
+                    chipsContainer.visibility = View.GONE
                 }
             }
         })
@@ -103,14 +106,14 @@ class NewsListFragment : Fragment() {
         articleList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                    val lastItemAt = viewModel.news.value!!.lastIndex
-                    Log.d("NewsListFragment", "lastItemAt = $lastItemAt")
-                    if (mLayoutManager.findLastCompletelyVisibleItemPosition() == lastItemAt) {
-                        Log.d("NewsListFragment", "Is Last Row")
-                        currentPage++
-                        viewModel.loadMore(currentPage)
-                        newsListAdapter.notifyDataSetChanged()
-                    }
+                val lastItemAt = viewModel.news.value!!.lastIndex
+                Log.d("NewsListFragment", "lastItemAt = $lastItemAt")
+                if (mLayoutManager.findLastCompletelyVisibleItemPosition() == lastItemAt) {
+                    Log.d("NewsListFragment", "Is Last Row")
+                    currentPage++
+                    viewModel.loadMore(currentPage)
+                    newsListAdapter.notifyDataSetChanged()
+                }
             }
         })
     }
@@ -127,10 +130,10 @@ class NewsListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_bookmarked -> {
-                view?.let {
-                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
-            }
+//            R.id.action_bookmarked -> {
+//                view?.let {
+//                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
+//            }
         }
         return super.onOptionsItemSelected(item)
     }

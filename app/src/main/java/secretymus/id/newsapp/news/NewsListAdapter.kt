@@ -12,34 +12,46 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_news.view.*
 import secretymus.id.newsapp.R
 import secretymus.id.newsapp.databinding.ItemNewsBinding
+import secretymus.id.newsapp.databinding.ItemNewsExtendedBinding
 import secretymus.id.newsapp.model.Article
 import secretymus.id.newsapp.views.NewsListFragmentDirections
 
 class NewsListAdapter(
-        private val articleList: ArrayList<Article>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-        ItemClickListener {
+    private val articleList: ArrayList<Article>
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    ItemClickListener {
 
     val urlToImage: String? = null
 
     private val dummyArticle = Article(
-            null,
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "")
+        null,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+    )
 
     companion object {
         const val ITEM_VIEW_TYPE_CONTENT = 1
         const val ITEM_VIEW_TYPE_LOADING = 2
+        const val ITEM_VIEW_TYPE_CONTENT_EXTENDED = 3
     }
 
-    override fun getItemViewType(position: Int): Int = if ( position == articleList.lastIndex) {
-        ITEM_VIEW_TYPE_LOADING
-    } else {
-        ITEM_VIEW_TYPE_CONTENT
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            articleList.lastIndex -> {
+                ITEM_VIEW_TYPE_LOADING
+            }
+            0 -> {
+                ITEM_VIEW_TYPE_CONTENT
+            }
+            else -> {
+                ITEM_VIEW_TYPE_CONTENT_EXTENDED
+            }
+        }
     }
 
     fun loadMore(nArticleList: List<Article>) {
@@ -59,7 +71,24 @@ class NewsListAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             ITEM_VIEW_TYPE_CONTENT -> {
-                NewsViewHolder(DataBindingUtil.inflate(inflater, R.layout.item_news, parent, false))
+                NewsViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_news,
+                        parent,
+                        false
+                    )
+                )
+            }
+            ITEM_VIEW_TYPE_CONTENT_EXTENDED -> {
+                NewsExtendedViewHolder(
+                    DataBindingUtil.inflate(
+                        inflater,
+                        R.layout.item_news_extended,
+                        parent,
+                        false
+                    )
+                )
             }
             else -> {
                 ViewHolderLoading(inflater.inflate(R.layout.item_loading, parent, false))
@@ -72,10 +101,16 @@ class NewsListAdapter(
         if (holder is NewsViewHolder) {
             holder.view.article = articleList[position]
             holder.view.listener = this
+        } else if (holder is NewsExtendedViewHolder) {
+            holder.view.article = articleList[position]
+            holder.view.listener = this
         }
     }
 
     class NewsViewHolder(var view: ItemNewsBinding) : RecyclerView.ViewHolder(view.root)
+
+    class NewsExtendedViewHolder(var view: ItemNewsExtendedBinding) :
+        RecyclerView.ViewHolder(view.root)
 
     class ViewHolderLoading(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
@@ -83,14 +118,14 @@ class NewsListAdapter(
 
     override fun onNewsClicked(view: View) {
         val article = Article(
-                source = null,
-                author = view.author.text.toString(),
-                title = view.titleText.text.toString(),
-                description = view.description.text.toString(),
-                url = view.url.text.toString(),
-                urlToImage = view.urlText.text.toString(),
-                publishedAt = view.publishTimeText.text.toString(),
-                content = view.contentText.text.toString()
+            source = null,
+            author = view.author.text.toString(),
+            title = view.titleText.text.toString(),
+            description = view.description.text.toString(),
+            url = view.url.text.toString(),
+            urlToImage = view.urlText.text.toString(),
+            publishedAt = view.publishTimeText.text.toString(),
+            content = view.contentText.text.toString()
         )
         Log.d("Adapters", view.urlText.text.toString() + "")
         val action = NewsListFragmentDirections.actionDetailFragment(article)
