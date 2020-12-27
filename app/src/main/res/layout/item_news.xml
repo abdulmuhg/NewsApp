@@ -77,7 +77,7 @@
             android:maxLines="2"
             android:text="@{article.title}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:fontFamily="@font/librefranklin_regular"
+            app:fontFamily="@font/librefranklin_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

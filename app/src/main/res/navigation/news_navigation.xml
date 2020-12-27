@@ -14,8 +14,8 @@
         <action
             android:id="@+id/actionDetailFragment"
             app:destination="@+id/detailFragment"
-            app:enterAnim="@animator/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
 
         <action
             android:id="@+id/actionBookmarkFragment"
@@ -27,13 +27,13 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="secretymus.id.newsapp.views.DetailFragment"
-        android:label="Detail"
+        android:label="The Fortnightly"
         tools:layout="@layout/fragment_detail">
 
         <action
             android:id="@+id/actionListFragment"
             app:destination="@+id/listFragment"
-            app:enterAnim="@animator/nav_default_enter_anim"
+            app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/nav_default_exit_anim" />
 
         <argument
