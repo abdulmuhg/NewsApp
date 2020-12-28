@@ -84,8 +84,16 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="16dp">
-
+                    android:paddingVertical="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/librefranklin_regular"
+                        android:text="#Covid"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="16sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
