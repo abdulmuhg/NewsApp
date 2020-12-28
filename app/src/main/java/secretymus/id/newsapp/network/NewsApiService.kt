@@ -16,11 +16,11 @@ class NewsApiService {
         .create(NewsApi::class.java)
 
     fun getNews(page: Int): Single<News> {
-        return api.getNews(COUNTRY_IDN_VALUE, "daf70d7cff96457c8c3a1ce3e4dd4a4b", page)
+        return api.getNews(COUNTRY, "daf70d7cff96457c8c3a1ce3e4dd4a4b", page)
     }
 
     companion object {
         private const val BASE_URL = "https://newsapi.org/v2/"
-        private const val COUNTRY_IDN_VALUE = "us"
+        private const val COUNTRY = "au"
     }
 }

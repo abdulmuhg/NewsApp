@@ -21,9 +21,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="16dp"
+        android:background="?selectableItemBackground"
         android:onClick="@{listener::onNewsClicked}"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        android:baselineAligned="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -35,7 +38,7 @@
                 android:id="@+id/categoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="POLITICS"
+                android:text="@string/sample_category_3"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                 app:fontFamily="@font/librefranklin_bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +58,11 @@
                 android:id="@+id/titleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:maxLines="2"
                 android:text="@{article.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 android:textColor="@color/colorSecondary"
                 android:textSize="16sp"
                 app:fontFamily="@font/librefranklin_bold"
@@ -70,7 +73,6 @@
                 tools:text="The Quiet, Yet Powerful Healthcare Revolution" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/publishTimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,6 +80,7 @@
                 android:dateFormat="@{article.publishedAt}"
                 android:fontFamily="@font/librefranklin_regular"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/categoryText"
                 app:layout_constraintStart_toEndOf="@id/categoryText"
                 app:layout_constraintTop_toTopOf="@id/categoryText"

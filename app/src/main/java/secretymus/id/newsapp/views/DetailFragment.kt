@@ -25,7 +25,7 @@ class DetailFragment : Fragment(), NewsActionListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setHasOptionsMenu(true)
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         return dataBinding.root
@@ -33,17 +33,23 @@ class DetailFragment : Fragment(), NewsActionListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getBundles()
+        initViewModel()
+        observeViewModel()
+    }
+
+    private fun getBundles(){
         arguments?.let {
             mArticle = DetailFragmentArgs.fromBundle(it).mArticle
 
             val urlToImg = mArticle.urlToImage
             Log.d("DetailFragment", urlToImg!!)
-
         }
+    }
 
+    private fun initViewModel(){
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         viewModel.fetch(mArticle)
-        observeViewModel()
     }
     
     private fun observeViewModel() {

@@ -4,4 +4,6 @@
     <color name="colorSecondary">#FF000000</color>
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorGrey">#dddddd</color>
+    <color name="gray200">#EEEEEE</color>
+    <color name="gray500">#9E9E9E</color>
 </resources>

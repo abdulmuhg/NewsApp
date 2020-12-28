@@ -65,8 +65,8 @@ class NewsListFragment : Fragment() {
             )
         )
 
-        viewModel.refreshBypassCache()
-        //viewModel.getFakeData()
+        //viewModel.refreshBypassCache()
+        viewModel.getFakeData()
         observeViewModel()
         addScrollerListener()
     }
@@ -86,7 +86,7 @@ class NewsListFragment : Fragment() {
             isError?.let {
                 listError.visibility = if (it) View.VISIBLE else View.GONE
                 shimmerFrameLayout.visibility = View.GONE
-                //chipsContainer.visibility = View.GONE
+                chipsContainer.visibility = View.GONE
             }
         })
 
@@ -96,7 +96,7 @@ class NewsListFragment : Fragment() {
                 if (it) {
                     listError.visibility = View.GONE
                     articleList.visibility = View.GONE
-                    chipsContainer.visibility = View.GONE
+                    //chipsContainer.visibility = View.GONE
                 }
             }
         })
@@ -129,12 +129,12 @@ class NewsListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+//        when (item.itemId) {
 //            R.id.action_bookmarked -> {
 //                view?.let {
 //                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
 //            }
-        }
+//        }
         return super.onOptionsItemSelected(item)
     }
 

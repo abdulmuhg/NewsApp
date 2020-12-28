@@ -13,6 +13,7 @@ abstract class NewsDatabase: RoomDatabase(){
     companion object {
         @Volatile private var instance: NewsDatabase? = null
         private val LOCK = Any()
+        private const val DB_NAME = "newsdatabase"
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
             instance ?: buildDatabase(context).also{
@@ -22,7 +23,7 @@ abstract class NewsDatabase: RoomDatabase(){
         private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context.applicationContext,
             NewsDatabase::class.java,
-            "newsdatabase"
+            DB_NAME
         ).build()
     }
 }

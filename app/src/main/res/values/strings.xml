@@ -4,8 +4,16 @@
     <string name="save">Save</string>
     <string name="fetch_error_message">An error occurred while loading data</string>
     <string name="search">Search</string>
-    <string name="bookmark">Bookmark</string>
     <string name="detail_image">detail image</string>
-    <string name="powered_by">Powered by</string>
-    <string name="app_icon">app icon</string>
+    <string name="sample_country">US</string>
+    <string name="sample_category">POVERTY</string>
+    <string name="by">by</string>
+    <string name="sample_tag_1">#TechDesign</string>
+    <string name="sample_tag_2">#Reform</string>
+    <string name="sample_tag_3">#HealthcareRevolution</string>
+    <string name="sample_category_2">WORLD</string>
+    <string name="sample_category_3">POLITICS</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="image_placeholder">Image Placeholder</string>
+    <string name="splash_image">Splash Image</string>
 </resources>

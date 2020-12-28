@@ -53,14 +53,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/librefranklin_bold"
-                        android:text="US"
+                        android:text="@string/sample_country"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/librefranklin_bold"
-                        android:text="POVERTY"
+                        android:text="@string/sample_category"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                 </LinearLayout>
@@ -145,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="@font/merriweather_regular"
-                            android:text="by"
+                            android:text="@string/by"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                             android:textSize="18sp" />
 
