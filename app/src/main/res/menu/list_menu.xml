@@ -7,10 +7,10 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView" />
-<!--    <item-->
-<!--        android:id="@+id/action_bookmarked"-->
-<!--        android:icon="@drawable/ic_bookmark"-->
-<!--        android:title="@string/bookmark"-->
-<!--        app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/action_bookmarked"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/bookmark"
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -1,19 +1,21 @@
 <resources>
-    <string name="app_name">News App</string>
+    <string name="app_name">The Fortnightly</string>
     <string name="content_image">content_image</string>
     <string name="save">Save</string>
     <string name="fetch_error_message">An error occurred while loading data</string>
     <string name="search">Search</string>
     <string name="detail_image">detail image</string>
     <string name="sample_country">US</string>
-    <string name="sample_category">POLITICS</string>
+    <string name="sample_category">WORLD</string>
     <string name="by">by</string>
     <string name="sample_tag_1">#TechDesign</string>
     <string name="sample_tag_2">#Reform</string>
     <string name="sample_tag_3">#HealthcareRevolution</string>
     <string name="sample_category_2">US</string>
-    <string name="sample_category_3">ENTERTAINMENT</string>
+    <string name="sample_category_3">TECHNOLOGY</string>
     <string name="placeholder">Placeholder</string>
     <string name="image_placeholder">Image Placeholder</string>
     <string name="splash_image">Splash Image</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="covid">#Covid</string>
 </resources>

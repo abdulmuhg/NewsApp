@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -129,12 +130,12 @@ class NewsListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_bookmarked -> {
-//                view?.let {
-//                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
-//            }
-//        }
+        when (item.itemId) {
+            R.id.action_bookmarked -> {
+                view?.let {
+                    Navigation.findNavController(it).navigate(NewsListFragmentDirections.actionBookmarkFragment()) }
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 

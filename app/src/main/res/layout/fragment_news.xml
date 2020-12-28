@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/librefranklin_regular"
-                        android:text="#Covid"
+                        android:text="@string/covid"
                         android:textAllCaps="false"
                         android:textColor="@color/colorSecondary"
                         android:textSize="16sp" />
@@ -150,6 +150,7 @@
                 android:text="@string/fetch_error_message"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/articleList" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
