@@ -1,7 +1,6 @@
 package secretymus.id.newsapp.bookmark
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
@@ -24,7 +23,6 @@ class BookmarkViewModel (application: Application): BaseViewModel(application) {
         launch {
             val news = NewsDatabase(getApplication()).newsDao().getAllArticle()
             newsRetrieved(news)
-            Toast.makeText(getApplication(), "News retrieved from internal storage", Toast.LENGTH_SHORT).show()
         }
     }
     private fun newsRetrieved(list: List<Article>) {

@@ -11,7 +11,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:statusBarColor">@color/gray200</item>
-        <item name="backgroundColor">@color/gray200</item>
+        <item name="android:background">@color/gray200</item>
     </style>
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>

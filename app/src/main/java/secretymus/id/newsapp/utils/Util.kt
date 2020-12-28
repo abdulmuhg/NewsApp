@@ -28,7 +28,8 @@ fun getProgressDrawable(context: Context): CircularProgressDrawable {
     }
 }
 
-fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
+@JvmName("loadImage_")
+fun ImageView.loadImage(uri: String?) {
     val options = RequestOptions()
         .placeholder(R.drawable.image_placeholder)
         .error(R.drawable.ic_photo)
@@ -40,7 +41,7 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
 
 @BindingAdapter("android:imageUrl")
 fun loadImage(view: ImageView, url: String?) {
-    view.loadImage(url, getProgressDrawable(view.context))
+    view.loadImage(url)
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
